@@ -1,37 +1,53 @@
 <ion-header>
         <ion-navbar>
           <ion-title>
-            # MASUK
+            # MASUK APP
           </ion-title>
         </ion-navbar>
 </ion-header>
       
 <ion-content padding>
 
-<h1>
-test
-</h1>
+    <!-- <h1>
+       <b>
+            <u>NAYA</u>
+       </b> 
+    </h1> -->
 
-
+    
     <ion-list>
 
-        <ion-item>
-            <ion-label stacked>Nama Pengguna atau Email</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+        <form [formGroup]="loginForm">
 
-        <ion-item>
-            <ion-label stacked>Kata Kunci</ion-label>
-            <ion-input type="password"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label stacked>Nama Pengguna atau Email</ion-label>
+                <ion-input type="text" formControlName="userName" 
+                [class.invalid]="!loginForm.controls.userName.valid && (loginForm.controls.userName.dirty)">
+                </ion-input>
+            </ion-item>
 
+            <ion-item *ngIf="!loginForm.controls.userName.valid  && (loginForm.controls.userName.dirty)">
+                <p>Nama Pengguna atau Email Wajib Diisi.</p>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Kata Kunci</ion-label>
+                <ion-input type="password" formControlName="password" ></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty)">
+                    <p>Kata Kunci Wajib Diisi.</p>
+            </ion-item>
+
+        </form>
+    
         <ion-item>
-            <button ion-button>Masuk</button>
+            <button ion-button (click)="login()" >Masuk</button>
             <button ion-button color="danger">Lupa Kata Kunci?</button>
         </ion-item>
 
         <ion-item>
-            <button ion-button color="secondary" block>Belum Punya Akun? Silahkan Daftar Disini!</button>
+            <button ion-button color="secondary" block (click)="register()">Belum Punya Akun? Silahkan Daftar Disini!</button>
         </ion-item>
 
     </ion-list>
